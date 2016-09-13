@@ -5,9 +5,17 @@
  */
 package modelo;
 
-import armazenamento.MeioArmazenamento;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,26 +32,10 @@ public class Equipamento {
     public Equipamento(){
         this.listaManutencoes = new ArrayList();
     }
-
-
-    public static Equipamento obterPeloNumero(String numeroPatrimonio){
-        for(Equipamento objDaVez : Equipamento.obterLista()){
-            if(objDaVez.getPatrimonio().equals(numeroPatrimonio)){
-                return objDaVez;
-            }
-        }
-        return null;
+    
+    public void setListaManutencoes(ArrayList<Manutencao> listaManutencoes){
+        this.listaManutencoes = listaManutencoes;
     }
-    
-    public static ArrayList<Equipamento>  obterLista(){
-        return MeioArmazenamento.MEIO_ARMAZENAMENTO_EQUIPAMENTOS;
-    }
-    
-    public void salvar(){
-        MeioArmazenamento.MEIO_ARMAZENAMENTO_EQUIPAMENTOS.add(this);
-    }
-    
-    
     
     public ArrayList<Manutencao> getListaManutencoes(){
         return listaManutencoes;
@@ -60,8 +52,6 @@ public class Equipamento {
         }
         return total;
     }
-    
-    
     
     /**
      * @return the nome

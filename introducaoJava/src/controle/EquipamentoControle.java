@@ -5,11 +5,12 @@
  */
 package controle;
 
-import armazenamento.MeioArmazenamento;
 import java.util.ArrayList;
 import java.util.Date;
 import modelo.Equipamento;
+import modelo.EquipamentoDao;
 import modelo.Manutencao;
+import modelo.ManutencaoDao;
 
 /**
  *
@@ -24,30 +25,25 @@ public class EquipamentoControle {
         objetoEquipamento.setDataAquisicao(dataAquisicao);
         objetoEquipamento.setDataTerminoGarantia(dateTeminoGarantia);
         objetoEquipamento.setValor(valor);
-        objetoEquipamento.salvar();
+        EquipamentoDao.salvar(objetoEquipamento);
     }
     
     public static ArrayList<Equipamento> obterListaEquipamentos(){
-        return Equipamento.obterLista();
+        return EquipamentoDao.obterLista();
     }
     
     public static Equipamento obterEquipamentoPeloNumeroDoPatrimonio(String numeroPatrimonio){
-        return Equipamento.obterPeloNumero(numeroPatrimonio);
+        return EquipamentoDao.obterPeloNumero(numeroPatrimonio);
     }
     
     public static void receberDadosNovaManutencao(String numeroPatrimonio, String descricao, Date data, float valor){
-        Equipamento encontrado = Equipamento.obterPeloNumero(numeroPatrimonio);
+        Equipamento encontrado = EquipamentoDao.obterPeloNumero(numeroPatrimonio);
         Manutencao novaManutencao = new Manutencao();
         novaManutencao.setData(data);
         novaManutencao.setDescricao(descricao);
         novaManutencao.setValor(valor);
-        
-        
-        
-        
         encontrado.adicionaManutencao(novaManutencao);
-        //encontrado.salvar();
-        //método salvar não necessário por enquanto pois, como os dados estão em memória, o próprio objeto manipulado é o mesmo do meio de armazenamento
+        ManutencaoDao.salvar(encontrado);
     }
     
 }

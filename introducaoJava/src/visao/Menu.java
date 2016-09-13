@@ -5,7 +5,6 @@
  */
 package visao;
 
-import armazenamento.MeioArmazenamento;
 import java.util.Scanner;
 
 /**
@@ -17,7 +16,6 @@ public class Menu {
     public static void exibirMenu(){
         do{
             System.out.println("==== MENU PRINCIPAL ====");
-            System.out.println("Número de equipamentos: "+MeioArmazenamento.MEIO_ARMAZENAMENTO_EQUIPAMENTOS.size());
 
             System.out.println("Seleciona a opção:");
             System.out.println("1) Cadastro equipamento");
