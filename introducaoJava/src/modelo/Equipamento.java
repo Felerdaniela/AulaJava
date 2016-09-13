@@ -6,12 +6,6 @@
 package modelo;
 
 import armazenamento.MeioArmazenamento;
-import com.sun.corba.se.impl.resolver.SplitLocalResolverImpl;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -42,24 +36,11 @@ public class Equipamento {
     }
     
     public static ArrayList<Equipamento>  obterLista(){
-        String dados = ("dsa;dasdasdas;dasdasd;asdsadasd;faf");
-        String[] dadosSeparados = dados.split(";");
         return MeioArmazenamento.MEIO_ARMAZENAMENTO_EQUIPAMENTOS;
     }
     
     public void salvar(){
-        Path salvarArquivo = Paths.get("Salvamento.txt");
-        ArrayList<String> listaLinhas = new ArrayList();
-        
-        String dadosEquipamento = this.getNome() + " ; " + this.getPatrimonio() + " ; " + this.getDataAquisicao().toString() + " ; " + this.getDataTerminoGarantia().toString() + " ; " + Float.toString(this.getValor());      
-        listaLinhas.add(dadosEquipamento + "\r\n");
-        try{    
-            Files.write(salvarArquivo, listaLinhas, StandardOpenOption.CREATE,StandardOpenOption.APPEND);
-        }catch(Exception e){
-        }
-        
-        //--- ANTIGO ---
-        //MeioArmazenamento.MEIO_ARMAZENAMENTO_EQUIPAMENTOS.add(this);
+        MeioArmazenamento.MEIO_ARMAZENAMENTO_EQUIPAMENTOS.add(this);
     }
     
     
